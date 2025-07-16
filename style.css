@@ -13,21 +13,55 @@
 body {
     font-family: 'Inter', sans-serif;
     color: var(--text-primary-color); /* Aplică culoarea principală a textului pe tot body-ul */
-    /* Eliminam flexbox de pe body, acesta va fi pe .main-container */
-}
+    min-height: 100vh; /* Asigură că body-ul are cel puțin înălțimea viewport-ului */
+    display: flex; /* Activeaza flexbox pentru a aranja .main-container */
+    flex-direction: column; /* Asigură un layout corect al .main-container */
 
-/* --- Nou container principal pentru imaginea de fundal și flexbox --- */
-.main-container {
+    /* Implicit, fundalul de pe body va fi pentru mobil (fix) */
     background-image: url('./assets/background.jpeg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed; /* Fundal fix pe mobil */
+}
+
+/* Ascundem elementul <img> pe mobil, deoarece folosim fundalul pe body */
+.background-scroll-image {
+    display: none;
+}
+
+/* --- Media query pentru ecrane desktop (mai mari de 768px) --- */
+@media (min-width: 769px) {
+    body {
+        /* Pe desktop, eliminăm fundalul de pe body */
+        background-image: none;
+        background-attachment: scroll; /* Asigură că nu există atașament fix rezidual */
+    }
+
+    /* Pe desktop, afișăm elementul <img> și îl facem să se deruleze */
+    .background-scroll-image {
+        display: block; /* Afișează imaginea */
+        position: absolute; /* Imaginea se va derula cu părintele */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+    }
+}
+
+
+/* --- Nou container principal pentru imaginea de fundal și flexbox --- */
+.main-container {
     position: relative;
     z-index: 0;
-    min-height: 100vh;
+    min-height: 100vh; /* Permite conținutului să se deruleze peste fundalul fix/derulabil */
     display: flex; /* Activeaza flexbox pentru a aranja aside si main */
     flex-direction: column; /* Pe ecrane mici, elementele vor fi pe coloane */
+    width: 100%; /* Asigură că main-container ocupă toată lățimea */
 }
+
 
 /* --- Nou overlay pentru .main-container (înlocuiește main::before) --- */
 .main-container::before {
@@ -38,8 +72,8 @@ body {
     right: 0;
     bottom: 0;
     /* Aici am schimbat overlay-ul la o nuanță de alb semi-transparent pentru un efect de sticlă mai pur */
-    background-color: rgba(255, 255, 255, 0.062); /* Alb semi-transparent, similar cu varianta inițială */
-    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.105); /* Alb semi-transparent, similar cu varianta inițială */
+    z-index: 1; /* Keep this above the image, below content */
 }
 
 /* --- Modificări la stilurile aside --- */
@@ -64,13 +98,13 @@ aside p {
 }
 
 aside strong {
-    color: #232323; /* Text alb pentru strong */
+    color: #908787; /* Text alb pentru strong */
     /* letter-spacing: 3px; */
 }
 
 #photographer{
-    letter-spacing: 11px;
-    color:#232323;
+    letter-spacing: 6px;
+    color: #908787;
     flex: auto;
 }
 
@@ -118,7 +152,7 @@ main h2#main-title {
 /* --- NEW: Photo Gallery Column Layout --- */
 .photo-gallery-columns {
     column-count: 1; /* Default to 1 column on small screens */
-    column-gap: 1.5rem; /* Gap between columns */
+    column-gap: 0.7rem; /* Gap between columns */
     padding: 1.5rem; /* Padding around the columns */
 }
 
@@ -126,7 +160,7 @@ main h2#main-title {
     -webkit-column-break-inside: avoid; /* Prevent images from breaking across columns */
     page-break-inside: avoid;
     break-inside: avoid-column;
-    margin-bottom: 1.5rem; /* Space between images within columns */
+    margin-bottom: 0.75rem; /* Smaller space between images within columns */
     background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent background for image items */
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
@@ -140,7 +174,7 @@ main h2#main-title {
 
 .photo-gallery-columns .photo-item:hover {
     transform: scale(1.3); /* Slight scale on hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+    box-shadow: 0 10px 36px rgb(0, 0, 0); /* Shadow on hover */
 }
 
 /* Adjust column count for larger screens */
@@ -156,15 +190,19 @@ main h2#main-title {
     }
 }
 
-/* --- REMOVED: Old gallery-image styles and #content-area flex/grid styles --- */
-/* The previous .gallery-image and #content-area specific styles for image display are replaced by the above */
-
 /* Stiluri pentru butonul de intoarcere */
 #back-button {
     transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    /* Glass effect properties */
+    background-color: rgba(255, 255, 255, 0.079); /* Semi-transparent white background */
+    backdrop-filter: blur(10px); /* Apply blur effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    color: white; /* Ensure text is visible */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Subtle text shadow for better contrast */
 }
 
 #back-button:hover {
+    background-color: rgba(255, 255, 255, 0); /* Slightly less transparent on hover */
     transform: translateY(-2px); /* Efect de ridicare la hover */
 }
 
@@ -174,13 +212,11 @@ main h2#main-title {
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
+    background: #343434;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 10px;
+    background: #664431;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -192,7 +228,6 @@ main h2#main-title {
     aside {
         position: relative;
         width: 100%;
-        border-radius: 0 0 1rem 1rem;
         padding-bottom: 2rem;
     }
 

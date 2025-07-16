@@ -2,46 +2,64 @@
 // Asigura-te ca numele folderelor din 'assets/' se potrivesc cu 'id'-urile categoriilor
 const categories = [
     {
-        id: 'events',
-        name: 'E V E N T S',
-        description: 'description',
-        thumbnail: './assets/events/events1.jpeg', // O imagine reprezentativa pentru categorie
-        images: [
-            './assets/events/evets1.jpeg',
-            // Adauga mai multe imagini aici
-            // './assets/eveniment/eveniment3.jpg',
-        ]
-    },
-    {
         id: 'nature',
-        name: 'N A T U R E',
-        description: 'description',
-        thumbnail: './assets/nature/nature1.jpeg',
+        name: 'C O L O R',
+        description: 'a study of color’s depth and nuance',
+        thumbnail: './assets/color/color9.jpeg',
         images: [
-            './assets/nature/nature1.jpeg',
-            './assets/nature/nature2.jpeg',
+            './assets/color/color1.jpeg',
+            './assets/color/color2.jpeg',
+            './assets/color/color3.jpeg',
+            './assets/color/color4.jpeg',
+            './assets/color/color5.jpeg',
+            './assets/color/color6.jpeg',
+            './assets/color/color7.jpeg',
+            './assets/color/color8.jpeg',
+            './assets/color/color9.jpeg',
+            './assets/color/color10.jpeg',
+            './assets/color/color11.jpeg',
+            './assets/color/color12.jpeg',
+            './assets/color/color13.jpeg',
+            './assets/color/color14.jpeg',
+            './assets/color/color15.jpeg',
+            './assets/color/color16.jpeg',
             // Adauga mai multe imagini aici
             // './assets/natura/natura3.jpg',
         ]
     },
     {
         id: 'people',
-        name: 'P E O P L E',
-        description: 'description',
-        thumbnail: './assets/people/ion2.jpeg',
+        name: 'M O N O C H R O M E',
+        description: 'timeless studies in light, shadow, and form',
+        thumbnail: './assets/monochrome/mono1.jpeg',
         images: [
-            './assets/people/bia1.jpeg',
-            './assets/people/bia2.jpeg',
-            './assets/people/bia3.jpeg',
-            './assets/people/bia4.jpeg',
-            './assets/people/bia5.jpeg',
-            './assets/people/ion1.jpeg',
-            './assets/people/ion2.jpeg',
-            './assets/people/cris1.jpeg',
-            './assets/people/cris2.jpeg',
-            './assets/people/cris3.jpeg',
-            './assets/people/cris4.jpeg',
-            './assets/people/cris5.jpeg',
+            './assets/monochrome/mono1.jpeg',
+            './assets/monochrome/mono2.jpeg',
+            './assets/monochrome/mono3.jpeg',
+            './assets/monochrome/mono4.jpeg',
+            './assets/monochrome/mono5.jpeg',
+            './assets/monochrome/mono6.jpeg',
+            './assets/monochrome/mono7.jpeg',
+            './assets/monochrome/mono8.jpeg',
+            './assets/monochrome/mono9.jpeg',
+            './assets/monochrome/mono10.jpeg',
+            './assets/monochrome/mono11.jpeg',
+            './assets/monochrome/mono12.jpeg',
+            './assets/monochrome/mono13.jpeg',
+            './assets/monochrome/mono14.jpeg',
+            './assets/monochrome/mono15.jpeg',
+            './assets/monochrome/mono16.jpeg',
+            './assets/monochrome/mono17.jpeg',
+            './assets/monochrome/mono18.jpeg',
+            './assets/monochrome/mono19.jpeg',
+            './assets/monochrome/mono20.jpeg',
+            './assets/monochrome/mono21.jpeg',
+            './assets/monochrome/mono22.jpeg',
+            './assets/monochrome/mono23.jpeg',
+            './assets/monochrome/mono24.jpeg',
+            './assets/monochrome/mono25.jpeg',
+            './assets/monochrome/mono26.jpeg',
+            './assets/monochrome/mono27.jpeg',
             // Adauga mai multe imagini aici
             // './assets/oameni/oameni3.jpg',
         ]
@@ -71,6 +89,7 @@ const backButton = document.getElementById('back-button');
  */
 function displayCategories() {
     contentArea.innerHTML = ''; // Goleste zona de continut
+    mainTitle.textContent = ''; // Adaugă această linie pentru a goli titlul principal
     backButton.classList.add('hidden'); // Ascunde butonul de intoarcere
 
     // Seteaza layout-ul pentru categorii sa fie una sub alta
@@ -96,7 +115,7 @@ function displayCategories() {
         const img = document.createElement('img');
         img.src = category.thumbnail;
         img.alt = `Imagine ${category.name}`;
-        img.classList.add('w-full', 'h-56', 'object-cover'); // These classes are fine for thumbnails
+        img.classList.add('w-full', 'h-72', 'object-cover'); // These classes are fine for thumbnails
         img.onerror = function() {
             this.src = 'https://placehold.co/600x400/cccccc/333333?text=Imagine lipsa';
         };
