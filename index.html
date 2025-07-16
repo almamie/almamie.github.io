@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liana's Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="font-inter text-gray-800"> <div class="main-container flex flex-col md:flex-row min-h-screen">
+        <aside class="w-full md:w-1/5 p-6 md:p-8 flex flex-col items-center md:items-start text-center md:text-left">
+            <div class="mb-6">
+                <img src="./assets/profilePic/profilePic1.jpeg" alt="ProfilePic" class=" object-cover shadow-md">
+            </div>
+            <h1 class="text-3xl font-bold mb-2">LIANA MARIN</h1> <p class="text-lg mb-4" id="photographer">photographer</p> <div class="text-sm space-y-2"> <p><strong class="font-semibold">email:</strong> li4ntx@gmail.com</p>
+                <p><strong class="font-semibold">phone:</strong> 0756 579 570</p>
+                <p><strong class="font-semibold">location:</strong> București</p>
+                <p><strong class="font-semibold">social:</strong> <a href="https://www.instagram.com/li4ntx?utm_source=ig_web_button_share_sheet&igsh=Mmh3bGVhdm1sYnB5" target="_blank" class="hover:underline">Instagram</a></p> </div>
+        </aside>
+
+        <main class="flex-1 p-6 md:p-8 overflow-auto">
+            <h2 id="main-title" class="text-4xl font-extrabold mb-8 text-center md:text-left"></h2> <div id="content-area" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                </div>
+
+            <button id="back-button" class="hidden mt-8 px-6 py-3 bg-blue-600 text-white font-semibold shadow-md hover:bg-blue-700 transition duration-300 ease-in-out">
+                &larr; r e t u r n
+            </button>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

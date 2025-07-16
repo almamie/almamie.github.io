@@ -1,0 +1,228 @@
+/* style.css */
+
+/* Importa fontul Inter (deja facut in HTML, dar e bine sa fie si aici pentru consistenta) */
+@import url('https://fonts.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root {
+    --text-primary-color: #333333;
+    --text-secondary-color: #666666;
+    --text-highlight-color: #1e40af;
+}
+
+/* --- Modificări la stilurile generale body --- */
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-primary-color); /* Aplică culoarea principală a textului pe tot body-ul */
+    /* Eliminam flexbox de pe body, acesta va fi pe .main-container */
+}
+
+/* --- Nou container principal pentru imaginea de fundal și flexbox --- */
+.main-container {
+    background-image: url('./assets/background.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 0;
+    min-height: 100vh;
+    display: flex; /* Activeaza flexbox pentru a aranja aside si main */
+    flex-direction: column; /* Pe ecrane mici, elementele vor fi pe coloane */
+}
+
+/* --- Nou overlay pentru .main-container (înlocuiește main::before) --- */
+.main-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Aici am schimbat overlay-ul la o nuanță de alb semi-transparent pentru un efect de sticlă mai pur */
+    background-color: rgba(255, 255, 255, 0.062); /* Alb semi-transparent, similar cu varianta inițială */
+    z-index: 1;
+}
+
+/* --- Modificări la stilurile aside --- */
+aside {
+    min-height: 250px;
+    z-index: 2; /* Asigura ca aside este deasupra overlay-ului */
+    background-color: rgba(255, 255, 255, 0); /* Alb semi-transparent pentru un aspect de sticlă clară */
+    backdrop-filter: blur(10px); /* Efect de blur */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Umbră discretă */
+    /* Stilurile Tailwind din HTML precum w-full, md:w-1/4, p-6, etc. vor completa stilizarea */
+}
+
+/* --- Noi stiluri specifice pentru textul din aside --- */
+aside h1 {
+    color: rgb(255, 255, 255); /* Text alb pentru titlu */
+    letter-spacing: 3.6px;
+}
+
+aside p {
+    color: rgb(239, 239, 239); /* Text gri deschis pentru paragraf */
+    letter-spacing: 3px;
+}
+
+aside strong {
+    color: #232323; /* Text alb pentru strong */
+    /* letter-spacing: 3px; */
+}
+
+#photographer{
+    letter-spacing: 11px;
+    color:#232323;
+    flex: auto;
+}
+
+aside a {
+    color: rgb(173, 216, 230); /* O culoare deschisă pentru link (ex: light blue) */
+}
+
+/* --- Modificări la stilurile main --- */
+main {
+    background-image: none; /* Eliminam imaginea de fundal de pe main */
+    position: relative;
+    z-index: 2; /* Asigura ca main este deasupra overlay-ului */
+    background-color: transparent; /* Asiguram ca main este transparent */
+    flex-grow: 1; /* Permite main să ocupe spațiul disponibil */
+}
+
+/* --- Nou stil pentru titlul principal din main --- */
+main h2#main-title {
+    color: rgba(255, 255, 255, 0.867);
+}
+
+.category-card .text-overlay {
+    color: rgb(255, 255, 255); /* Culoare default pentru textul din overlay */
+}
+
+.category-card .text-overlay h3 {
+    color: rgba(255, 255, 255, 0.836); /* Culoare pentru titlul din overlay */
+}
+
+.category-card .text-overlay p {
+    color: rgba(255, 255, 255, 0.538); /* Culoare pentru descrierea din overlay */
+}
+
+/* Stiluri pentru cardurile de categorie */
+.category-card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    background-color: rgba(255, 255, 255, 0.85); /* Fundal semi-transparent pentru carduri */
+}
+
+.category-card:hover {
+    transform: translateY(-5px); /* Efect de ridicare la hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Umbra mai pronuntata la hover */
+}
+
+/* --- NEW: Photo Gallery Column Layout --- */
+.photo-gallery-columns {
+    column-count: 1; /* Default to 1 column on small screens */
+    column-gap: 1.5rem; /* Gap between columns */
+    padding: 1.5rem; /* Padding around the columns */
+}
+
+.photo-gallery-columns .photo-item {
+    -webkit-column-break-inside: avoid; /* Prevent images from breaking across columns */
+    page-break-inside: avoid;
+    break-inside: avoid-column;
+    margin-bottom: 1.5rem; /* Space between images within columns */
+    background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent background for image items */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.photo-gallery-columns .photo-item img {
+    max-width: 100%; /* Ensure image fits within its column */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove extra space below image */
+    object-fit: contain; /* Ensure the whole image is visible, maintaining aspect ratio */
+}
+
+.photo-gallery-columns .photo-item:hover {
+    transform: scale(1.3); /* Slight scale on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+}
+
+/* Adjust column count for larger screens */
+@media (min-width: 640px) { /* sm breakpoint */
+    .photo-gallery-columns {
+        column-count: 2; /* 2 columns on small screens and up */
+    }
+}
+
+@media (min-width: 1024px) { /* lg breakpoint */
+    .photo-gallery-columns {
+        column-count: 3; /* 3 columns on large screens and up (optional, keep at 2 if you prefer) */
+    }
+}
+
+/* --- REMOVED: Old gallery-image styles and #content-area flex/grid styles --- */
+/* The previous .gallery-image and #content-area specific styles for image display are replaced by the above */
+
+/* Stiluri pentru butonul de intoarcere */
+#back-button {
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+#back-button:hover {
+    transform: translateY(-2px); /* Efect de ridicare la hover */
+}
+
+/* Stiluri pentru scrollbar (optional, pentru o estetica mai buna) */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 768px) {
+    aside {
+        position: relative;
+        width: 100%;
+        border-radius: 0 0 1rem 1rem;
+        padding-bottom: 2rem;
+    }
+
+    main {
+        padding: 1.5rem;
+        margin-left: 0;
+    }
+
+    #main-title {
+        text-align: center;
+        font-size: 2.5rem;
+    }
+}
+
+/* --- Noul bloc pentru ecrane medii și mari --- */
+@media (min-width: 769px) {
+    aside {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 25%;
+    }
+
+    .main-container {
+        flex-direction: row;
+    }
+
+    main {
+        margin-left: 20%; /* Keep this if you want the aside to still affect main's position */
+        width: 75%; /* Main will occupy the remaining 3/4 width */
+    }
+}
